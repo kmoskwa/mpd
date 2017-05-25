@@ -723,44 +723,226 @@ margin-bottom: 20px;
 
   var defs = {}
 
-  defs.InventoryItem = {
+  defs.QuerySMIParameterProperties = {
   "type" : "object",
-  "required" : [ "id", "manufacturer", "name", "releaseDate" ],
   "properties" : {
-    "id" : {
+    "paramID" : {
+      "type" : "string",
+      "example" : "paramID"
+    },
+    "value" : {
+      "type" : "string",
+      "example" : "paramValue"
+    }
+  }
+};
+  defs.ResponseSMIImageProperties = {
+  "type" : "object",
+  "required" : [ "url", "uuid" ],
+  "properties" : {
+    "uuid" : {
+      "type" : "string",
+      "format" : "uuid",
+      "example" : "???"
+    },
+    "url" : {
+      "type" : "string",
+      "example" : "???"
+    },
+    "urlThumbnail" : {
+      "type" : "string",
+      "example" : "???"
+    },
+    "contentBase64" : {
+      "type" : "string",
+      "example" : "???"
+    }
+  }
+};
+  defs.ResponseSMIMessage = {
+  "type" : "object",
+  "properties" : {
+    "uuid" : {
+      "type" : "string",
+      "example" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    },
+    "publisher" : {
+      "type" : "string",
+      "example" : "Martin Geck"
+    },
+    "message" : {
+      "type" : "string",
+      "example" : "Message content example"
+    },
+    "assessment" : {
+      "type" : "integer",
+      "example" : 0
+    },
+    "rating" : {
+      "type" : "integer",
+      "example" : 0
+    },
+    "publishedDate" : {
+      "type" : "string",
+      "format" : "datetime",
+      "example" : "0"
+    },
+    "reactionsNumber" : {
+      "type" : "integer",
+      "example" : "??"
+    },
+    "reactionProperties" : {
+      "$ref" : "#/definitions/ResponseSMIReactionProperties"
+    },
+    "avatarProperties" : {
+      "$ref" : "#/definitions/ResponseSMIImageProperties"
+    },
+    "imageProperties" : {
+      "$ref" : "#/definitions/ResponseSMIImageProperties"
+    },
+    "videoProperties" : {
+      "$ref" : "#/definitions/ResponseSMIVideoProperties"
+    },
+    "statusProperties" : {
+      "$ref" : "#/definitions/ResponseSMIMessageProperties"
+    }
+  }
+};
+  defs.ResponseSMIMessageArray = {
+  "type" : "object",
+  "properties" : {
+    "searchUuid" : {
       "type" : "string",
       "format" : "uuid",
       "example" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
-    "name" : {
+    "nextUuid" : {
       "type" : "string",
-      "example" : "Widget Adapter"
+      "example" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
-    "releaseDate" : {
-      "type" : "string",
-      "format" : "int32",
-      "example" : "2016-08-29T09:12:33.001Z"
-    },
-    "manufacturer" : {
-      "$ref" : "#/definitions/Manufacturer"
+    "messages" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/ResponseSMIMessage"
+      }
     }
   }
 };
-  defs.Manufacturer = {
-  "required" : [ "name" ],
+  defs.ResponseSMIMessageProperties = {
+  "type" : "object",
   "properties" : {
+    "locked" : {
+      "type" : "boolean",
+      "example" : false
+    },
+    "modified" : {
+      "type" : "boolean",
+      "example" : false
+    },
+    "removed" : {
+      "type" : "boolean",
+      "example" : false
+    }
+  }
+};
+  defs.ResponseSMIParameterArray = {
+  "type" : "object",
+  "properties" : {
+    "parameters" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/ResponseSMIParameterProperties"
+      }
+    }
+  }
+};
+  defs.ResponseSMIParameterProperties = {
+  "type" : "object",
+  "properties" : {
+    "paramID" : {
+      "type" : "string",
+      "example" : "paramID"
+    },
+    "translationID" : {
+      "type" : "string",
+      "example" : "mpd.smi.paramID"
+    }
+  }
+};
+  defs.ResponseSMIReactionProperties = {
+  "type" : "object",
+  "properties" : {
+    "like" : {
+      "type" : "integer",
+      "example" : -1
+    },
+    "love" : {
+      "type" : "integer",
+      "example" : -1
+    },
+    "wow" : {
+      "type" : "integer",
+      "example" : -1
+    },
+    "haha" : {
+      "type" : "integer",
+      "example" : -1
+    },
+    "sad" : {
+      "type" : "integer",
+      "example" : -1
+    },
+    "angry" : {
+      "type" : "integer",
+      "example" : -1
+    },
+    "thankful" : {
+      "type" : "integer",
+      "example" : -1
+    },
+    "responses" : {
+      "type" : "integer",
+      "example" : -1
+    }
+  }
+};
+  defs.ResponseSMISearchProperties = {
+  "type" : "object",
+  "properties" : {
+    "uuid" : {
+      "type" : "string",
+      "format" : "uuid",
+      "example" : "uuid"
+    },
     "name" : {
       "type" : "string",
-      "example" : "ACME Corporation"
+      "example" : "searchName"
+    }
+  }
+};
+  defs.ResponseSMIVideoProperties = {
+  "type" : "object",
+  "properties" : {
+    "uuid" : {
+      "type" : "string",
+      "example" : "???"
     },
-    "homePage" : {
+    "url" : {
       "type" : "string",
       "format" : "url",
-      "example" : "https://www.acme-corp.com"
+      "example" : "???"
     },
-    "phone" : {
+    "supported" : {
+      "type" : "boolean",
+      "example" : true
+    },
+    "downloaded" : {
+      "type" : "boolean",
+      "example" : false
+    },
+    "status" : {
       "type" : "string",
-      "example" : "408-867-5309"
+      "example" : "OK"
     }
   }
 };
@@ -783,13 +965,25 @@ margin-bottom: 20px;
                     <li class="nav-fixed nav-header active" data-group="_"><a href="#api-_">API Summary</a></li>
 
 
-                                <li class="nav-header" data-group="Mpdingest"><a href="#api-Mpdingest">API Methods - Mpdingest</a></li>
-                                    <li data-group="Mpdingest" data-name="searchInventory" class="">
-                                        <a href="#api-Mpdingest-searchInventory">searchInventory</a>
-                                    </li>
                                 <li class="nav-header" data-group="Mpdpublishtwitter"><a href="#api-Mpdpublishtwitter">API Methods - Mpdpublishtwitter</a></li>
-                                    <li data-group="Mpdpublishtwitter" data-name="addInventory" class="">
-                                        <a href="#api-Mpdpublishtwitter-addInventory">addInventory</a>
+                                    <li data-group="Mpdpublishtwitter" data-name="query" class="">
+                                        <a href="#api-Mpdpublishtwitter-query">query</a>
+                                    </li>
+                                    <li data-group="Mpdpublishtwitter" data-name="queryParameters" class="">
+                                        <a href="#api-Mpdpublishtwitter-queryParameters">queryParameters</a>
+                                    </li>
+                                <li class="nav-header" data-group="Mpdsearch"><a href="#api-Mpdsearch">API Methods - Mpdsearch</a></li>
+                                    <li data-group="Mpdsearch" data-name="addInventory" class="">
+                                        <a href="#api-Mpdsearch-addInventory">addInventory</a>
+                                    </li>
+                                    <li data-group="Mpdsearch" data-name="create" class="">
+                                        <a href="#api-Mpdsearch-create">create</a>
+                                    </li>
+                                    <li data-group="Mpdsearch" data-name="remove" class="">
+                                        <a href="#api-Mpdsearch-remove">remove</a>
+                                    </li>
+                                    <li data-group="Mpdsearch" data-name="rename" class="">
+                                        <a href="#api-Mpdsearch-rename">rename</a>
                                     </li>
 
 
@@ -820,8 +1014,8 @@ margin-bottom: 20px;
             <div id="sections">
 
 
-                            <section id="api-Mpdingest">
-                                <h1>Mpdingest</h1>
+                            <section id="api-Mpdpublishtwitter">
+                                <h1>Mpdpublishtwitter</h1>
 
 
 
@@ -829,12 +1023,12 @@ margin-bottom: 20px;
 
 
 
-                                    <div id="api-Mpdingest-searchInventory">
+                                    <div id="api-Mpdpublishtwitter-query">
 
-                                        <article id="api-Mpdingest-searchInventory-0" data-group="User" data-name="searchInventory" data-version="0">
+                                        <article id="api-Mpdpublishtwitter-query-0" data-group="User" data-name="query" data-version="0">
                                             <div class="pull-left">
-                                                <h1>searchInventory</h1>
-                                                <p>searches inventory</p>
+                                                <h1>query</h1>
+                                                <p>Queries search response</p>
                                             </div>
                                             <div class="pull-right">
 
@@ -848,7 +1042,7 @@ available inventory in the system
                                             <p></p>
                                             <br />
 
-                                            <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/inventory</span></code></pre>
+                                            <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/query</span></code></pre>
 
                                             <p>
                                                 <h3>Usage and SDK Samples</h3>
@@ -856,66 +1050,65 @@ available inventory in the system
 
                                             <ul class="nav nav-tabs nav-tabs-examples">
                                                 <li class="active">
-                                                    <a href="#examples-Mpdingest-searchInventory-0-curl">Curl</a>
+                                                    <a href="#examples-Mpdpublishtwitter-query-0-curl">Curl</a>
                                                 </li>
                                                 <li class="">
-              <a href="#examples-Mpdingest-searchInventory-0-java">Java</a>
+              <a href="#examples-Mpdpublishtwitter-query-0-java">Java</a>
             </li>
             <li class="">
-              <a href="#examples-Mpdingest-searchInventory-0-android">Android</a>
+              <a href="#examples-Mpdpublishtwitter-query-0-android">Android</a>
             </li>
             <!--<li class="">
-              <a href="#examples-Mpdingest-searchInventory-0-groovy">Groovy</a>
+              <a href="#examples-Mpdpublishtwitter-query-0-groovy">Groovy</a>
             </li>-->
                                                 <li class="">
-                                                    <a href="#examples-Mpdingest-searchInventory-0-objc">Obj-C</a>
+                                                    <a href="#examples-Mpdpublishtwitter-query-0-objc">Obj-C</a>
                                                 </li>
                                                 <li class="">
-                                                    <a href="#examples-Mpdingest-searchInventory-0-javascript">JavaScript</a>
+                                                    <a href="#examples-Mpdpublishtwitter-query-0-javascript">JavaScript</a>
                                                 </li>
                                                 <!--<li class="">
-              <a href="#examples-Mpdingest-searchInventory-0-angular">Angular</a>
+              <a href="#examples-Mpdpublishtwitter-query-0-angular">Angular</a>
             </li>-->
                                                 <li class="">
-                                                    <a href="#examples-Mpdingest-searchInventory-0-csharp">C#</a>
+                                                    <a href="#examples-Mpdpublishtwitter-query-0-csharp">C#</a>
                                                 </li>
                                                 <li class="">
-              <a href="#examples-Mpdingest-searchInventory-0-php">PHP</a>
+              <a href="#examples-Mpdpublishtwitter-query-0-php">PHP</a>
             </li>
                                             </ul>
 
                                             <div class="tab-content">
-                                                <div class="tab-pane active" id="examples-Mpdingest-searchInventory-0-curl">
+                                                <div class="tab-pane active" id="examples-Mpdpublishtwitter-query-0-curl">
                                                     <pre class="prettyprint"><code class="language-bsh">
-curl -X <span style="text-transform: uppercase;">get</span> "https://virtserver.swaggerhub.com/kmoskwa/Test/1.0.0/inventory?searchString=&skip=&limit="
+curl -X <span style="text-transform: uppercase;">get</span> "https://virtserver.swaggerhub.com/kmoskwa/Test/1.0.0/query?searchUuid="
 
 
 </code></pre>
                                                 </div>
 
-                                                <div class="tab-pane" id="examples-Mpdingest-searchInventory-0-java">
+                                                <div class="tab-pane" id="examples-Mpdpublishtwitter-query-0-java">
                                                   <pre class="prettyprint"><code class="language-java">
 import io.swagger.client.*;
 import io.swagger.client.auth.*;
 import io.swagger.client.model.*;
-import .MpdingestApi;
+import .MpdpublishtwitterApi;
 
 import java.io.File;
 import java.util.*;
 
-public class MpdingestApiExample {
+public class MpdpublishtwitterApiExample {
 
     public static void main(String[] args) {
         
-        MpdingestApi apiInstance = new MpdingestApi();
-        String searchString = searchString_example; // String | pass an optional search string for looking up inventory
-        Integer skip = 56; // Integer | number of records to skip for pagination
-        Integer limit = 56; // Integer | maximum number of records to return
+        MpdpublishtwitterApi apiInstance = new MpdpublishtwitterApi();
+        UUID searchUuid = searchUuid_example; // UUID | query id
+        array[QuerySMIParameterProperties] parameters = ; // array[QuerySMIParameterProperties] | query parameters
         try {
-            array[InventoryItem] result = apiInstance.searchInventory(searchString, skip, limit);
+            ResponseSMIMessageArray result = apiInstance.query(searchUuid, parameters);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling MpdingestApi#searchInventory");
+            System.err.println("Exception when calling MpdpublishtwitterApi#query");
             e.printStackTrace();
         }
     }
@@ -925,22 +1118,21 @@ public class MpdingestApiExample {
           </div>
 
 
-                                                <div class="tab-pane" id="examples-Mpdingest-searchInventory-0-android">
+                                                <div class="tab-pane" id="examples-Mpdpublishtwitter-query-0-android">
                                                   <pre class="prettyprint"><code class="language-java">
-import .MpdingestApi;
+import .MpdpublishtwitterApi;
 
-public class MpdingestApiExample {
+public class MpdpublishtwitterApiExample {
 
     public static void main(String[] args) {
-        MpdingestApi apiInstance = new MpdingestApi();
-        String searchString = searchString_example; // String | pass an optional search string for looking up inventory
-        Integer skip = 56; // Integer | number of records to skip for pagination
-        Integer limit = 56; // Integer | maximum number of records to return
+        MpdpublishtwitterApi apiInstance = new MpdpublishtwitterApi();
+        UUID searchUuid = searchUuid_example; // UUID | query id
+        array[QuerySMIParameterProperties] parameters = ; // array[QuerySMIParameterProperties] | query parameters
         try {
-            array[InventoryItem] result = apiInstance.searchInventory(searchString, skip, limit);
+            ResponseSMIMessageArray result = apiInstance.query(searchUuid, parameters);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling MpdingestApi#searchInventory");
+            System.err.println("Exception when calling MpdpublishtwitterApi#query");
             e.printStackTrace();
         }
     }
@@ -950,25 +1142,23 @@ public class MpdingestApiExample {
           </div>
 
           <!--
-          <div class="tab-pane" id="examples-Mpdingest-searchInventory-0-groovy">
+          <div class="tab-pane" id="examples-Mpdpublishtwitter-query-0-groovy">
             <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
           </div> -->
 
 
-                                                <div class="tab-pane" id="examples-Mpdingest-searchInventory-0-objc">
+                                                <div class="tab-pane" id="examples-Mpdpublishtwitter-query-0-objc">
                                                     <pre class="prettyprint"><code class="language-cpp">
 
-String *searchString = searchString_example; // pass an optional search string for looking up inventory (optional)
-Integer *skip = 56; // number of records to skip for pagination (optional)
-Integer *limit = 56; // maximum number of records to return (optional)
+UUID *searchUuid = searchUuid_example; // query id
+array[QuerySMIParameterProperties] *parameters = ; // query parameters
 
-MpdingestApi *apiInstance = [[MpdingestApi alloc] init];
+MpdpublishtwitterApi *apiInstance = [[MpdpublishtwitterApi alloc] init];
 
-// searches inventory
-[apiInstance searchInventoryWith:searchString
-    skip:skip
-    limit:limit
-              completionHandler: ^(array[InventoryItem] output, NSError* error) {
+// Queries search response
+[apiInstance queryWith:searchUuid
+    parameters:parameters
+              completionHandler: ^(ResponseSMIMessageArray output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -979,17 +1169,16 @@ MpdingestApi *apiInstance = [[MpdingestApi alloc] init];
 
                                                     </code></pre>
                                                 </div>
-                                                <div class="tab-pane" id="examples-Mpdingest-searchInventory-0-javascript">
+                                                <div class="tab-pane" id="examples-Mpdpublishtwitter-query-0-javascript">
                                                     <pre class="prettyprint"><code class="language-js">
 var  = require('');
 
-var api = new .MpdingestApi()
+var api = new .MpdpublishtwitterApi()
 
-var opts = { 
-  'searchString': searchString_example, // {String} pass an optional search string for looking up inventory
-  'skip': 56, // {Integer} number of records to skip for pagination
-  'limit': 56 // {Integer} maximum number of records to return
-};
+var searchUuid = searchUuid_example; // {UUID} query id
+
+var parameters = ; // {array[QuerySMIParameterProperties]} query parameters
+
 
 var callback = function(error, data, response) {
   if (error) {
@@ -998,16 +1187,16 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.searchInventory(opts, callback);
+api.query(searchUuid, parameters, callback);
 
                                                     </code></pre>
                                                 </div>
 
-                                                <!--<div class="tab-pane" id="examples-Mpdingest-searchInventory-0-angular">
+                                                <!--<div class="tab-pane" id="examples-Mpdpublishtwitter-query-0-angular">
             <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
           </div>-->
 
-                                                <div class="tab-pane" id="examples-Mpdingest-searchInventory-0-csharp">
+                                                <div class="tab-pane" id="examples-Mpdpublishtwitter-query-0-csharp">
                                                     <pre class="prettyprint"><code class="language-cs">
 using System;
 using System.Diagnostics;
@@ -1017,25 +1206,24 @@ using ;
 
 namespace Example
 {
-    public class searchInventoryExample
+    public class queryExample
     {
         public void main()
         {
             
-            var apiInstance = new MpdingestApi();
-            var searchString = searchString_example;  // String | pass an optional search string for looking up inventory (optional) 
-            var skip = 56;  // Integer | number of records to skip for pagination (optional) 
-            var limit = 56;  // Integer | maximum number of records to return (optional) 
+            var apiInstance = new MpdpublishtwitterApi();
+            var searchUuid = searchUuid_example;  // UUID | query id
+            var parameters = new array[QuerySMIParameterProperties](); // array[QuerySMIParameterProperties] | query parameters
 
             try
             {
-                // searches inventory
-                array[InventoryItem] result = apiInstance.searchInventory(searchString, skip, limit);
+                // Queries search response
+                ResponseSMIMessageArray result = apiInstance.query(searchUuid, parameters);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling MpdingestApi.searchInventory: " + e.Message );
+                Debug.Print("Exception when calling MpdpublishtwitterApi.query: " + e.Message );
             }
         }
     }
@@ -1045,21 +1233,20 @@ namespace Example
                                                 </div>
 
 
-                                                <div class="tab-pane" id="examples-Mpdingest-searchInventory-0-php">
+                                                <div class="tab-pane" id="examples-Mpdpublishtwitter-query-0-php">
                                                   <pre class="prettyprint"><code class="language-php">
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$api_instance = new io.swagger.client\Api\MpdingestApi();
-$searchString = searchString_example; // String | pass an optional search string for looking up inventory
-$skip = 56; // Integer | number of records to skip for pagination
-$limit = 56; // Integer | maximum number of records to return
+$api_instance = new io.swagger.client\Api\MpdpublishtwitterApi();
+$searchUuid = searchUuid_example; // UUID | query id
+$parameters = ; // array[QuerySMIParameterProperties] | query parameters
 
 try {
-    $result = $api_instance->searchInventory($searchString, $skip, $limit);
+    $result = $api_instance->query($searchUuid, $parameters);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling MpdingestApi->searchInventory: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling MpdpublishtwitterApi->query: ', $e->getMessage(), PHP_EOL;
 }
 
                                                   </code></pre>
@@ -1078,6 +1265,62 @@ try {
 
 
 
+                                                <div class="methodsubtabletitle">Body parameters</div>
+                                                <table id="methodsubtable">
+                                                    <tr>
+                                                        <th width="150px">Name</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                    <!---->
+                                                        <tr><td style="width:150px;">parameters <span style="color:red;">*</span></td>
+<td>
+
+
+<script>
+												$(document).ready(function() {
+													var schemaWrapper = {
+  "in" : "body",
+  "name" : "parameters",
+  "description" : "query parameters",
+  "required" : true,
+  "schema" : {
+    "type" : "array",
+    "items" : {
+      "$ref" : "#/definitions/QuerySMIParameterProperties"
+    }
+  }
+};
+													
+														var schema = schemaWrapper.schema;
+														schemaWrapper.definitions = defs;
+														JsonRefs.resolveRefs(schemaWrapper, {"depth":3, "resolveRemoteRefs":false,"resolveFileRefs":false },function (err, resolved, metadata) {
+														
+
+														
+													var view = new JSONSchemaView(resolved.schema,2,{isBodyParam: true});
+													 
+													var result = $('#d2e199_query_parameters');
+													result.empty();
+													result.append(view.render());
+													
+
+													
+    											
+													
+
+
+												});
+
+
+
+												});
+												</script>
+												<div id="d2e199_query_parameters"></div>
+</td>
+</tr>
+
+
+                                                </table>
 
 
                                                 <div class="methodsubtabletitle">Query parameters</div>
@@ -1087,18 +1330,19 @@ try {
                                                         <th>Description</th>
                                                     </tr>
                                                     <!---->
-                                                        <tr><td style="width:150px;">searchString</td>
+                                                        <tr><td style="width:150px;">searchUuid*</td>
 <td>
 
 
 <script>
 												$(document).ready(function() {
 													var schemaWrapper = {
-  "name" : "searchString",
+  "name" : "searchUuid",
   "in" : "query",
-  "description" : "pass an optional search string for looking up inventory",
-  "required" : false,
-  "type" : "string"
+  "description" : "query id",
+  "required" : true,
+  "type" : "string",
+  "format" : "uuid"
 };
 													var schema = schemaWrapper;
 
@@ -1106,7 +1350,7 @@ try {
 
 
 													var view = new JSONSchemaView(schema,0);
-													var result = $('#d2e199_searchInventory_searchString');
+													var result = $('#d2e199_query_searchUuid');
 													result.empty();
 													result.append(view.render());
 
@@ -1116,78 +1360,7 @@ try {
 
 												});
 												</script>
-												<div id="d2e199_searchInventory_searchString"></div>
-</td>
-</tr>
-
-                                                        <tr><td style="width:150px;">skip</td>
-<td>
-
-
-<script>
-												$(document).ready(function() {
-													var schemaWrapper = {
-  "name" : "skip",
-  "in" : "query",
-  "description" : "number of records to skip for pagination",
-  "required" : false,
-  "type" : "integer",
-  "minimum" : 0,
-  "format" : "int32"
-};
-													var schema = schemaWrapper;
-
-
-
-
-													var view = new JSONSchemaView(schema,0);
-													var result = $('#d2e199_searchInventory_skip');
-													result.empty();
-													result.append(view.render());
-
-
-
-
-
-												});
-												</script>
-												<div id="d2e199_searchInventory_skip"></div>
-</td>
-</tr>
-
-                                                        <tr><td style="width:150px;">limit</td>
-<td>
-
-
-<script>
-												$(document).ready(function() {
-													var schemaWrapper = {
-  "name" : "limit",
-  "in" : "query",
-  "description" : "maximum number of records to return",
-  "required" : false,
-  "type" : "integer",
-  "maximum" : 50,
-  "minimum" : 0,
-  "format" : "int32"
-};
-													var schema = schemaWrapper;
-
-
-
-
-													var view = new JSONSchemaView(schema,0);
-													var result = $('#d2e199_searchInventory_limit');
-													result.empty();
-													result.append(view.render());
-
-
-
-
-
-												});
-												</script>
-												<div id="d2e199_searchInventory_limit"></div>
+												<div id="d2e199_query_searchUuid"></div>
 </td>
 </tr>
 
@@ -1195,12 +1368,12 @@ try {
 
                                             <h2>Responses</h2>
 
-                                                <h3> Status: 200 - search results matching criteria </h3>
+                                                <h3> Status: 200 - correct result </h3>
 
                                                 <ul class="nav nav-tabs nav-tabs-examples" >
 
                                                     <li class="active">
-                                                        <a href="#examples-Mpdingest-searchInventory-schema">Schema</a>
+                                                        <a href="#examples-Mpdpublishtwitter-query-schema">Schema</a>
                                                     </li>
 
 
@@ -1216,22 +1389,19 @@ try {
 
 
 
-                                                    <div class="tab-pane active" id="examples-Mpdingest-searchInventory-schema">
+                                                    <div class="tab-pane active" id="examples-Mpdpublishtwitter-query-schema">
 
 
 
 
-                                                        <div id='examples-Mpdingest-searchInventory-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                                        <div id='examples-Mpdpublishtwitter-query-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
 
                                                             <script>
                                                                 $(document).ready(function() {
                                                                     var schemaWrapper = {
-  "description" : "search results matching criteria",
+  "description" : "correct result",
   "schema" : {
-    "type" : "array",
-    "items" : {
-      "$ref" : "#/definitions/InventoryItem"
-    }
+    "$ref" : "#/definitions/ResponseSMIMessageArray"
   }
 };
                                                                     var schema = schemaWrapper.schema;
@@ -1248,8 +1418,8 @@ try {
 
 
                                                                         var view = new JSONSchemaView(resolved.schema, 3);
-                                                                        $('#examples-Mpdingest-searchInventory-schema-data').val(JSON.stringify(resolved.schema));
-                                                                        var result = $('#examples-Mpdingest-searchInventory-schema-200');
+                                                                        $('#examples-Mpdpublishtwitter-query-schema-data').val(JSON.stringify(resolved.schema));
+                                                                        var result = $('#examples-Mpdpublishtwitter-query-schema-200');
                                                                         result.empty();
                                                                         result.append(view.render());
                                                                     });
@@ -1260,7 +1430,7 @@ try {
                                                                 });
                                                             </script>
                                                         </div>
-                                                        <input id='examples-Mpdingest-searchInventory-schema-data' type='hidden' value=''></input>
+                                                        <input id='examples-Mpdpublishtwitter-query-schema-data' type='hidden' value=''></input>
 
 
 
@@ -1282,7 +1452,7 @@ try {
                                                 <ul class="nav nav-tabs nav-tabs-examples" >
 
                                                     <li class="active">
-                                                        <a href="#examples-Mpdingest-searchInventory-schema">Schema</a>
+                                                        <a href="#examples-Mpdpublishtwitter-query-schema">Schema</a>
                                                     </li>
 
 
@@ -1298,12 +1468,12 @@ try {
 
 
 
-                                                    <div class="tab-pane active" id="examples-Mpdingest-searchInventory-schema">
+                                                    <div class="tab-pane active" id="examples-Mpdpublishtwitter-query-schema">
 
 
 
 
-                                                        <div id='examples-Mpdingest-searchInventory-schema-400' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                                        <div id='examples-Mpdpublishtwitter-query-schema-400' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
 
                                                             <script>
                                                                 $(document).ready(function() {
@@ -1324,8 +1494,8 @@ try {
 
 
                                                                         var view = new JSONSchemaView(resolved.schema, 3);
-                                                                        $('#examples-Mpdingest-searchInventory-schema-data').val(JSON.stringify(resolved.schema));
-                                                                        var result = $('#examples-Mpdingest-searchInventory-schema-400');
+                                                                        $('#examples-Mpdpublishtwitter-query-schema-data').val(JSON.stringify(resolved.schema));
+                                                                        var result = $('#examples-Mpdpublishtwitter-query-schema-400');
                                                                         result.empty();
                                                                         result.append(view.render());
                                                                     });
@@ -1336,7 +1506,414 @@ try {
                                                                 });
                                                             </script>
                                                         </div>
-                                                        <input id='examples-Mpdingest-searchInventory-schema-data' type='hidden' value=''></input>
+                                                        <input id='examples-Mpdpublishtwitter-query-schema-data' type='hidden' value=''></input>
+
+
+
+
+
+
+                                                    </div>
+
+
+
+
+                                                </div>
+
+
+
+
+
+
+
+
+
+                                        </article>
+
+                                    </div>
+
+                                    <hr>
+
+
+
+
+
+
+
+
+                                    <div id="api-Mpdpublishtwitter-queryParameters">
+
+                                        <article id="api-Mpdpublishtwitter-queryParameters-0" data-group="User" data-name="queryParameters" data-version="0">
+                                            <div class="pull-left">
+                                                <h1>queryParameters</h1>
+                                                <p>returns list of parameters of the search for specific sourcee</p>
+                                            </div>
+                                            <div class="pull-right">
+
+                                            </div>
+                                            <div class="clearfix"></div>
+
+                                            <p></p>
+                                            <p class="marked">By passing in the appropriate options, you can search for
+available inventory in the system
+</p>
+                                            <p></p>
+                                            <br />
+
+                                            <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/queryParameters</span></code></pre>
+
+                                            <p>
+                                                <h3>Usage and SDK Samples</h3>
+                                            </p>
+
+                                            <ul class="nav nav-tabs nav-tabs-examples">
+                                                <li class="active">
+                                                    <a href="#examples-Mpdpublishtwitter-queryParameters-0-curl">Curl</a>
+                                                </li>
+                                                <li class="">
+              <a href="#examples-Mpdpublishtwitter-queryParameters-0-java">Java</a>
+            </li>
+            <li class="">
+              <a href="#examples-Mpdpublishtwitter-queryParameters-0-android">Android</a>
+            </li>
+            <!--<li class="">
+              <a href="#examples-Mpdpublishtwitter-queryParameters-0-groovy">Groovy</a>
+            </li>-->
+                                                <li class="">
+                                                    <a href="#examples-Mpdpublishtwitter-queryParameters-0-objc">Obj-C</a>
+                                                </li>
+                                                <li class="">
+                                                    <a href="#examples-Mpdpublishtwitter-queryParameters-0-javascript">JavaScript</a>
+                                                </li>
+                                                <!--<li class="">
+              <a href="#examples-Mpdpublishtwitter-queryParameters-0-angular">Angular</a>
+            </li>-->
+                                                <li class="">
+                                                    <a href="#examples-Mpdpublishtwitter-queryParameters-0-csharp">C#</a>
+                                                </li>
+                                                <li class="">
+              <a href="#examples-Mpdpublishtwitter-queryParameters-0-php">PHP</a>
+            </li>
+                                            </ul>
+
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="examples-Mpdpublishtwitter-queryParameters-0-curl">
+                                                    <pre class="prettyprint"><code class="language-bsh">
+curl -X <span style="text-transform: uppercase;">get</span> "https://virtserver.swaggerhub.com/kmoskwa/Test/1.0.0/queryParameters"
+
+
+</code></pre>
+                                                </div>
+
+                                                <div class="tab-pane" id="examples-Mpdpublishtwitter-queryParameters-0-java">
+                                                  <pre class="prettyprint"><code class="language-java">
+import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import .MpdpublishtwitterApi;
+
+import java.io.File;
+import java.util.*;
+
+public class MpdpublishtwitterApiExample {
+
+    public static void main(String[] args) {
+        
+        MpdpublishtwitterApi apiInstance = new MpdpublishtwitterApi();
+        try {
+            array[ResponseSMIParameterProperties] result = apiInstance.queryParameters();
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling MpdpublishtwitterApi#queryParameters");
+            e.printStackTrace();
+        }
+    }
+}
+
+                                                  </code></pre>
+          </div>
+
+
+                                                <div class="tab-pane" id="examples-Mpdpublishtwitter-queryParameters-0-android">
+                                                  <pre class="prettyprint"><code class="language-java">
+import .MpdpublishtwitterApi;
+
+public class MpdpublishtwitterApiExample {
+
+    public static void main(String[] args) {
+        MpdpublishtwitterApi apiInstance = new MpdpublishtwitterApi();
+        try {
+            array[ResponseSMIParameterProperties] result = apiInstance.queryParameters();
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling MpdpublishtwitterApi#queryParameters");
+            e.printStackTrace();
+        }
+    }
+}
+
+                                                  </code></pre>
+          </div>
+
+          <!--
+          <div class="tab-pane" id="examples-Mpdpublishtwitter-queryParameters-0-groovy">
+            <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+          </div> -->
+
+
+                                                <div class="tab-pane" id="examples-Mpdpublishtwitter-queryParameters-0-objc">
+                                                    <pre class="prettyprint"><code class="language-cpp">
+
+
+MpdpublishtwitterApi *apiInstance = [[MpdpublishtwitterApi alloc] init];
+
+// returns list of parameters of the search for specific sourcee
+[apiInstance queryParametersWithCompletionHandler: 
+              ^(array[ResponseSMIParameterProperties] output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+
+                                                    </code></pre>
+                                                </div>
+                                                <div class="tab-pane" id="examples-Mpdpublishtwitter-queryParameters-0-javascript">
+                                                    <pre class="prettyprint"><code class="language-js">
+var  = require('');
+
+var api = new .MpdpublishtwitterApi()
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.queryParameters(callback);
+
+                                                    </code></pre>
+                                                </div>
+
+                                                <!--<div class="tab-pane" id="examples-Mpdpublishtwitter-queryParameters-0-angular">
+            <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+          </div>-->
+
+                                                <div class="tab-pane" id="examples-Mpdpublishtwitter-queryParameters-0-csharp">
+                                                    <pre class="prettyprint"><code class="language-cs">
+using System;
+using System.Diagnostics;
+using .Api;
+using .Client;
+using ;
+
+namespace Example
+{
+    public class queryParametersExample
+    {
+        public void main()
+        {
+            
+            var apiInstance = new MpdpublishtwitterApi();
+
+            try
+            {
+                // returns list of parameters of the search for specific sourcee
+                array[ResponseSMIParameterProperties] result = apiInstance.queryParameters();
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling MpdpublishtwitterApi.queryParameters: " + e.Message );
+            }
+        }
+    }
+}
+
+                                                    </code></pre>
+                                                </div>
+
+
+                                                <div class="tab-pane" id="examples-Mpdpublishtwitter-queryParameters-0-php">
+                                                  <pre class="prettyprint"><code class="language-php">
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new io.swagger.client\Api\MpdpublishtwitterApi();
+
+try {
+    $result = $api_instance->queryParameters();
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling MpdpublishtwitterApi->queryParameters: ', $e->getMessage(), PHP_EOL;
+}
+
+                                                  </code></pre>
+          </div>
+
+                                            </div>
+
+
+
+
+
+                                            <h2>Parameters</h2>
+
+
+
+
+
+
+
+
+
+                                            <h2>Responses</h2>
+
+                                                <h3> Status: 200 - correct result </h3>
+
+                                                <ul class="nav nav-tabs nav-tabs-examples" >
+
+                                                    <li class="active">
+                                                        <a href="#examples-Mpdpublishtwitter-queryParameters-schema">Schema</a>
+                                                    </li>
+
+
+                                                </ul>
+
+
+
+
+
+
+
+                                                <div class="tab-content" style='margin-bottom: 10px;'>
+
+
+
+                                                    <div class="tab-pane active" id="examples-Mpdpublishtwitter-queryParameters-schema">
+
+
+
+
+                                                        <div id='examples-Mpdpublishtwitter-queryParameters-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+
+                                                            <script>
+                                                                $(document).ready(function() {
+                                                                    var schemaWrapper = {
+  "description" : "correct result",
+  "schema" : {
+    "type" : "array",
+    "items" : {
+      "$ref" : "#/definitions/ResponseSMIParameterProperties"
+    }
+  }
+};
+                                                                    var schema = schemaWrapper.schema;
+                                                                    schemaWrapper.definitions = defs;
+                                                                    //console.log(JSON.stringify(schema))
+                                                                    JsonRefs.resolveRefs(schemaWrapper, {
+                                                                        "depth": 3,
+                                                                        "resolveRemoteRefs": false,
+                                                                        "resolveFileRefs": false
+                                                                    }, function(err, resolved, metadata) {
+
+                                                                        //console.log(JSON.stringify(resolved));
+
+
+
+                                                                        var view = new JSONSchemaView(resolved.schema, 3);
+                                                                        $('#examples-Mpdpublishtwitter-queryParameters-schema-data').val(JSON.stringify(resolved.schema));
+                                                                        var result = $('#examples-Mpdpublishtwitter-queryParameters-schema-200');
+                                                                        result.empty();
+                                                                        result.append(view.render());
+                                                                    });
+
+
+
+
+                                                                });
+                                                            </script>
+                                                        </div>
+                                                        <input id='examples-Mpdpublishtwitter-queryParameters-schema-data' type='hidden' value=''></input>
+
+
+
+
+
+
+                                                    </div>
+
+
+
+
+                                                </div>
+
+
+
+
+                                                <h3> Status: 400 - bad input parameter </h3>
+
+                                                <ul class="nav nav-tabs nav-tabs-examples" >
+
+                                                    <li class="active">
+                                                        <a href="#examples-Mpdpublishtwitter-queryParameters-schema">Schema</a>
+                                                    </li>
+
+
+                                                </ul>
+
+
+
+
+
+
+
+                                                <div class="tab-content" style='margin-bottom: 10px;'>
+
+
+
+                                                    <div class="tab-pane active" id="examples-Mpdpublishtwitter-queryParameters-schema">
+
+
+
+
+                                                        <div id='examples-Mpdpublishtwitter-queryParameters-schema-400' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+
+                                                            <script>
+                                                                $(document).ready(function() {
+                                                                    var schemaWrapper = {
+  "description" : "bad input parameter"
+};
+                                                                    var schema = schemaWrapper.schema;
+                                                                    schemaWrapper.definitions = defs;
+                                                                    //console.log(JSON.stringify(schema))
+                                                                    JsonRefs.resolveRefs(schemaWrapper, {
+                                                                        "depth": 3,
+                                                                        "resolveRemoteRefs": false,
+                                                                        "resolveFileRefs": false
+                                                                    }, function(err, resolved, metadata) {
+
+                                                                        //console.log(JSON.stringify(resolved));
+
+
+
+                                                                        var view = new JSONSchemaView(resolved.schema, 3);
+                                                                        $('#examples-Mpdpublishtwitter-queryParameters-schema-data').val(JSON.stringify(resolved.schema));
+                                                                        var result = $('#examples-Mpdpublishtwitter-queryParameters-schema-400');
+                                                                        result.empty();
+                                                                        result.append(view.render());
+                                                                    });
+
+
+
+
+                                                                });
+                                                            </script>
+                                                        </div>
+                                                        <input id='examples-Mpdpublishtwitter-queryParameters-schema-data' type='hidden' value=''></input>
 
 
 
@@ -1366,8 +1943,8 @@ try {
 
                             </section>
 
-                            <section id="api-Mpdpublishtwitter">
-                                <h1>Mpdpublishtwitter</h1>
+                            <section id="api-Mpdsearch">
+                                <h1>Mpdsearch</h1>
 
 
 
@@ -1375,12 +1952,12 @@ try {
 
 
 
-                                    <div id="api-Mpdpublishtwitter-addInventory">
+                                    <div id="api-Mpdsearch-addInventory">
 
-                                        <article id="api-Mpdpublishtwitter-addInventory-0" data-group="User" data-name="addInventory" data-version="0">
+                                        <article id="api-Mpdsearch-addInventory-0" data-group="User" data-name="addInventory" data-version="0">
                                             <div class="pull-left">
                                                 <h1>addInventory</h1>
-                                                <p>adds an inventory item</p>
+                                                <p>Lists searches within provided scope</p>
                                             </div>
                                             <div class="pull-right">
 
@@ -1388,11 +1965,11 @@ try {
                                             <div class="clearfix"></div>
 
                                             <p></p>
-                                            <p class="marked">Adds an item to the system</p>
+                                            <p class="marked">Lists searches within provided scope (user,  system, all/empty)</p>
                                             <p></p>
                                             <br />
 
-                                            <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/inventory</span></code></pre>
+                                            <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/list</span></code></pre>
 
                                             <p>
                                                 <h3>Usage and SDK Samples</h3>
@@ -1400,63 +1977,64 @@ try {
 
                                             <ul class="nav nav-tabs nav-tabs-examples">
                                                 <li class="active">
-                                                    <a href="#examples-Mpdpublishtwitter-addInventory-0-curl">Curl</a>
+                                                    <a href="#examples-Mpdsearch-addInventory-0-curl">Curl</a>
                                                 </li>
                                                 <li class="">
-              <a href="#examples-Mpdpublishtwitter-addInventory-0-java">Java</a>
+              <a href="#examples-Mpdsearch-addInventory-0-java">Java</a>
             </li>
             <li class="">
-              <a href="#examples-Mpdpublishtwitter-addInventory-0-android">Android</a>
+              <a href="#examples-Mpdsearch-addInventory-0-android">Android</a>
             </li>
             <!--<li class="">
-              <a href="#examples-Mpdpublishtwitter-addInventory-0-groovy">Groovy</a>
+              <a href="#examples-Mpdsearch-addInventory-0-groovy">Groovy</a>
             </li>-->
                                                 <li class="">
-                                                    <a href="#examples-Mpdpublishtwitter-addInventory-0-objc">Obj-C</a>
+                                                    <a href="#examples-Mpdsearch-addInventory-0-objc">Obj-C</a>
                                                 </li>
                                                 <li class="">
-                                                    <a href="#examples-Mpdpublishtwitter-addInventory-0-javascript">JavaScript</a>
+                                                    <a href="#examples-Mpdsearch-addInventory-0-javascript">JavaScript</a>
                                                 </li>
                                                 <!--<li class="">
-              <a href="#examples-Mpdpublishtwitter-addInventory-0-angular">Angular</a>
+              <a href="#examples-Mpdsearch-addInventory-0-angular">Angular</a>
             </li>-->
                                                 <li class="">
-                                                    <a href="#examples-Mpdpublishtwitter-addInventory-0-csharp">C#</a>
+                                                    <a href="#examples-Mpdsearch-addInventory-0-csharp">C#</a>
                                                 </li>
                                                 <li class="">
-              <a href="#examples-Mpdpublishtwitter-addInventory-0-php">PHP</a>
+              <a href="#examples-Mpdsearch-addInventory-0-php">PHP</a>
             </li>
                                             </ul>
 
                                             <div class="tab-content">
-                                                <div class="tab-pane active" id="examples-Mpdpublishtwitter-addInventory-0-curl">
+                                                <div class="tab-pane active" id="examples-Mpdsearch-addInventory-0-curl">
                                                     <pre class="prettyprint"><code class="language-bsh">
-curl -X <span style="text-transform: uppercase;">post</span> "https://virtserver.swaggerhub.com/kmoskwa/Test/1.0.0/inventory"
+curl -X <span style="text-transform: uppercase;">get</span> "https://virtserver.swaggerhub.com/kmoskwa/Test/1.0.0/list?scope="
 
 
 </code></pre>
                                                 </div>
 
-                                                <div class="tab-pane" id="examples-Mpdpublishtwitter-addInventory-0-java">
+                                                <div class="tab-pane" id="examples-Mpdsearch-addInventory-0-java">
                                                   <pre class="prettyprint"><code class="language-java">
 import io.swagger.client.*;
 import io.swagger.client.auth.*;
 import io.swagger.client.model.*;
-import .MpdpublishtwitterApi;
+import .MpdsearchApi;
 
 import java.io.File;
 import java.util.*;
 
-public class MpdpublishtwitterApiExample {
+public class MpdsearchApiExample {
 
     public static void main(String[] args) {
         
-        MpdpublishtwitterApi apiInstance = new MpdpublishtwitterApi();
-        InventoryItem inventoryItem = ; // InventoryItem | Inventory item to add
+        MpdsearchApi apiInstance = new MpdsearchApi();
+        String scope = scope_example; // String | scope of receiving searches
         try {
-            apiInstance.addInventory(inventoryItem);
+            array[ResponseSMISearchProperties] result = apiInstance.addInventory(scope);
+            System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling MpdpublishtwitterApi#addInventory");
+            System.err.println("Exception when calling MpdsearchApi#addInventory");
             e.printStackTrace();
         }
     }
@@ -1466,19 +2044,20 @@ public class MpdpublishtwitterApiExample {
           </div>
 
 
-                                                <div class="tab-pane" id="examples-Mpdpublishtwitter-addInventory-0-android">
+                                                <div class="tab-pane" id="examples-Mpdsearch-addInventory-0-android">
                                                   <pre class="prettyprint"><code class="language-java">
-import .MpdpublishtwitterApi;
+import .MpdsearchApi;
 
-public class MpdpublishtwitterApiExample {
+public class MpdsearchApiExample {
 
     public static void main(String[] args) {
-        MpdpublishtwitterApi apiInstance = new MpdpublishtwitterApi();
-        InventoryItem inventoryItem = ; // InventoryItem | Inventory item to add
+        MpdsearchApi apiInstance = new MpdsearchApi();
+        String scope = scope_example; // String | scope of receiving searches
         try {
-            apiInstance.addInventory(inventoryItem);
+            array[ResponseSMISearchProperties] result = apiInstance.addInventory(scope);
+            System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling MpdpublishtwitterApi#addInventory");
+            System.err.println("Exception when calling MpdsearchApi#addInventory");
             e.printStackTrace();
         }
     }
@@ -1488,21 +2067,24 @@ public class MpdpublishtwitterApiExample {
           </div>
 
           <!--
-          <div class="tab-pane" id="examples-Mpdpublishtwitter-addInventory-0-groovy">
+          <div class="tab-pane" id="examples-Mpdsearch-addInventory-0-groovy">
             <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
           </div> -->
 
 
-                                                <div class="tab-pane" id="examples-Mpdpublishtwitter-addInventory-0-objc">
+                                                <div class="tab-pane" id="examples-Mpdsearch-addInventory-0-objc">
                                                     <pre class="prettyprint"><code class="language-cpp">
 
-InventoryItem *inventoryItem = ; // Inventory item to add (optional)
+String *scope = scope_example; // scope of receiving searches (optional)
 
-MpdpublishtwitterApi *apiInstance = [[MpdpublishtwitterApi alloc] init];
+MpdsearchApi *apiInstance = [[MpdsearchApi alloc] init];
 
-// adds an inventory item
-[apiInstance addInventoryWith:inventoryItem
-              completionHandler: ^(NSError* error) {
+// Lists searches within provided scope
+[apiInstance addInventoryWith:scope
+              completionHandler: ^(array[ResponseSMISearchProperties] output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
                             if (error) {
                                 NSLog(@"Error: %@", error);
                             }
@@ -1510,21 +2092,21 @@ MpdpublishtwitterApi *apiInstance = [[MpdpublishtwitterApi alloc] init];
 
                                                     </code></pre>
                                                 </div>
-                                                <div class="tab-pane" id="examples-Mpdpublishtwitter-addInventory-0-javascript">
+                                                <div class="tab-pane" id="examples-Mpdsearch-addInventory-0-javascript">
                                                     <pre class="prettyprint"><code class="language-js">
 var  = require('');
 
-var api = new .MpdpublishtwitterApi()
+var api = new .MpdsearchApi()
 
 var opts = { 
-  'inventoryItem':  // {InventoryItem} Inventory item to add
+  'scope': scope_example // {String} scope of receiving searches
 };
 
 var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
-    console.log('API called successfully.');
+    console.log('API called successfully. Returned data: ' + data);
   }
 };
 api.addInventory(opts, callback);
@@ -1532,11 +2114,11 @@ api.addInventory(opts, callback);
                                                     </code></pre>
                                                 </div>
 
-                                                <!--<div class="tab-pane" id="examples-Mpdpublishtwitter-addInventory-0-angular">
+                                                <!--<div class="tab-pane" id="examples-Mpdsearch-addInventory-0-angular">
             <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
           </div>-->
 
-                                                <div class="tab-pane" id="examples-Mpdpublishtwitter-addInventory-0-csharp">
+                                                <div class="tab-pane" id="examples-Mpdsearch-addInventory-0-csharp">
                                                     <pre class="prettyprint"><code class="language-cs">
 using System;
 using System.Diagnostics;
@@ -1551,17 +2133,18 @@ namespace Example
         public void main()
         {
             
-            var apiInstance = new MpdpublishtwitterApi();
-            var inventoryItem = new InventoryItem(); // InventoryItem | Inventory item to add (optional) 
+            var apiInstance = new MpdsearchApi();
+            var scope = scope_example;  // String | scope of receiving searches (optional) 
 
             try
             {
-                // adds an inventory item
-                apiInstance.addInventory(inventoryItem);
+                // Lists searches within provided scope
+                array[ResponseSMISearchProperties] result = apiInstance.addInventory(scope);
+                Debug.WriteLine(result);
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling MpdpublishtwitterApi.addInventory: " + e.Message );
+                Debug.Print("Exception when calling MpdsearchApi.addInventory: " + e.Message );
             }
         }
     }
@@ -1571,18 +2154,19 @@ namespace Example
                                                 </div>
 
 
-                                                <div class="tab-pane" id="examples-Mpdpublishtwitter-addInventory-0-php">
+                                                <div class="tab-pane" id="examples-Mpdsearch-addInventory-0-php">
                                                   <pre class="prettyprint"><code class="language-php">
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$api_instance = new io.swagger.client\Api\MpdpublishtwitterApi();
-$inventoryItem = ; // InventoryItem | Inventory item to add
+$api_instance = new io.swagger.client\Api\MpdsearchApi();
+$scope = scope_example; // String | scope of receiving searches
 
 try {
-    $api_instance->addInventory($inventoryItem);
+    $result = $api_instance->addInventory($scope);
+    print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling MpdpublishtwitterApi->addInventory: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling MpdsearchApi->addInventory: ', $e->getMessage(), PHP_EOL;
 }
 
                                                   </code></pre>
@@ -1601,61 +2185,428 @@ try {
 
 
 
-                                                <div class="methodsubtabletitle">Body parameters</div>
+
+
+                                                <div class="methodsubtabletitle">Query parameters</div>
                                                 <table id="methodsubtable">
                                                     <tr>
                                                         <th width="150px">Name</th>
                                                         <th>Description</th>
                                                     </tr>
                                                     <!---->
-                                                        <tr><td style="width:150px;">inventoryItem </td>
+                                                        <tr><td style="width:150px;">scope</td>
 <td>
 
 
 <script>
 												$(document).ready(function() {
 													var schemaWrapper = {
-  "in" : "body",
-  "name" : "inventoryItem",
-  "description" : "Inventory item to add",
+  "name" : "scope",
+  "in" : "query",
+  "description" : "scope of receiving searches",
   "required" : false,
-  "schema" : {
-    "$ref" : "#/definitions/InventoryItem"
-  }
+  "type" : "string"
 };
-													
-														var schema = schemaWrapper.schema;
-														schemaWrapper.definitions = defs;
-														JsonRefs.resolveRefs(schemaWrapper, {"depth":3, "resolveRemoteRefs":false,"resolveFileRefs":false },function (err, resolved, metadata) {
-														
+													var schema = schemaWrapper;
 
-														
-													var view = new JSONSchemaView(resolved.schema,2,{isBodyParam: true});
-													 
-													var result = $('#d2e199_addInventory_inventoryItem');
+
+
+
+													var view = new JSONSchemaView(schema,0);
+													var result = $('#d2e199_addInventory_scope');
 													result.empty();
 													result.append(view.render());
-													
-
-													
-    											
-													
 
 
-												});
 
 
 
 												});
 												</script>
-												<div id="d2e199_addInventory_inventoryItem"></div>
+												<div id="d2e199_addInventory_scope"></div>
 </td>
 </tr>
 
-
                                                 </table>
 
+                                            <h2>Responses</h2>
 
+                                                <h3> Status: 200 - ok </h3>
+
+                                                <ul class="nav nav-tabs nav-tabs-examples" >
+
+                                                    <li class="active">
+                                                        <a href="#examples-Mpdsearch-addInventory-schema">Schema</a>
+                                                    </li>
+
+
+                                                </ul>
+
+
+
+
+
+
+
+                                                <div class="tab-content" style='margin-bottom: 10px;'>
+
+
+
+                                                    <div class="tab-pane active" id="examples-Mpdsearch-addInventory-schema">
+
+
+
+
+                                                        <div id='examples-Mpdsearch-addInventory-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+
+                                                            <script>
+                                                                $(document).ready(function() {
+                                                                    var schemaWrapper = {
+  "description" : "ok",
+  "schema" : {
+    "type" : "array",
+    "items" : {
+      "$ref" : "#/definitions/ResponseSMISearchProperties"
+    }
+  }
+};
+                                                                    var schema = schemaWrapper.schema;
+                                                                    schemaWrapper.definitions = defs;
+                                                                    //console.log(JSON.stringify(schema))
+                                                                    JsonRefs.resolveRefs(schemaWrapper, {
+                                                                        "depth": 3,
+                                                                        "resolveRemoteRefs": false,
+                                                                        "resolveFileRefs": false
+                                                                    }, function(err, resolved, metadata) {
+
+                                                                        //console.log(JSON.stringify(resolved));
+
+
+
+                                                                        var view = new JSONSchemaView(resolved.schema, 3);
+                                                                        $('#examples-Mpdsearch-addInventory-schema-data').val(JSON.stringify(resolved.schema));
+                                                                        var result = $('#examples-Mpdsearch-addInventory-schema-200');
+                                                                        result.empty();
+                                                                        result.append(view.render());
+                                                                    });
+
+
+
+
+                                                                });
+                                                            </script>
+                                                        </div>
+                                                        <input id='examples-Mpdsearch-addInventory-schema-data' type='hidden' value=''></input>
+
+
+
+
+
+
+                                                    </div>
+
+
+
+
+                                                </div>
+
+
+
+
+
+
+
+
+
+                                        </article>
+
+                                    </div>
+
+                                    <hr>
+
+
+
+
+
+
+
+
+                                    <div id="api-Mpdsearch-create">
+
+                                        <article id="api-Mpdsearch-create-0" data-group="User" data-name="create" data-version="0">
+                                            <div class="pull-left">
+                                                <h1>create</h1>
+                                                <p>adds a search item</p>
+                                            </div>
+                                            <div class="pull-right">
+
+                                            </div>
+                                            <div class="clearfix"></div>
+
+                                            <p></p>
+                                            <p class="marked">Adds an item to the system or user scope</p>
+                                            <p></p>
+                                            <br />
+
+                                            <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/create</span></code></pre>
+
+                                            <p>
+                                                <h3>Usage and SDK Samples</h3>
+                                            </p>
+
+                                            <ul class="nav nav-tabs nav-tabs-examples">
+                                                <li class="active">
+                                                    <a href="#examples-Mpdsearch-create-0-curl">Curl</a>
+                                                </li>
+                                                <li class="">
+              <a href="#examples-Mpdsearch-create-0-java">Java</a>
+            </li>
+            <li class="">
+              <a href="#examples-Mpdsearch-create-0-android">Android</a>
+            </li>
+            <!--<li class="">
+              <a href="#examples-Mpdsearch-create-0-groovy">Groovy</a>
+            </li>-->
+                                                <li class="">
+                                                    <a href="#examples-Mpdsearch-create-0-objc">Obj-C</a>
+                                                </li>
+                                                <li class="">
+                                                    <a href="#examples-Mpdsearch-create-0-javascript">JavaScript</a>
+                                                </li>
+                                                <!--<li class="">
+              <a href="#examples-Mpdsearch-create-0-angular">Angular</a>
+            </li>-->
+                                                <li class="">
+                                                    <a href="#examples-Mpdsearch-create-0-csharp">C#</a>
+                                                </li>
+                                                <li class="">
+              <a href="#examples-Mpdsearch-create-0-php">PHP</a>
+            </li>
+                                            </ul>
+
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="examples-Mpdsearch-create-0-curl">
+                                                    <pre class="prettyprint"><code class="language-bsh">
+curl -X <span style="text-transform: uppercase;">post</span> "https://virtserver.swaggerhub.com/kmoskwa/Test/1.0.0/create?name="
+
+
+</code></pre>
+                                                </div>
+
+                                                <div class="tab-pane" id="examples-Mpdsearch-create-0-java">
+                                                  <pre class="prettyprint"><code class="language-java">
+import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import .MpdsearchApi;
+
+import java.io.File;
+import java.util.*;
+
+public class MpdsearchApiExample {
+
+    public static void main(String[] args) {
+        
+        MpdsearchApi apiInstance = new MpdsearchApi();
+        String name = name_example; // String | scope of creating search
+        try {
+            ResponseSMISearchProperties result = apiInstance.create(name);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling MpdsearchApi#create");
+            e.printStackTrace();
+        }
+    }
+}
+
+                                                  </code></pre>
+          </div>
+
+
+                                                <div class="tab-pane" id="examples-Mpdsearch-create-0-android">
+                                                  <pre class="prettyprint"><code class="language-java">
+import .MpdsearchApi;
+
+public class MpdsearchApiExample {
+
+    public static void main(String[] args) {
+        MpdsearchApi apiInstance = new MpdsearchApi();
+        String name = name_example; // String | scope of creating search
+        try {
+            ResponseSMISearchProperties result = apiInstance.create(name);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling MpdsearchApi#create");
+            e.printStackTrace();
+        }
+    }
+}
+
+                                                  </code></pre>
+          </div>
+
+          <!--
+          <div class="tab-pane" id="examples-Mpdsearch-create-0-groovy">
+            <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+          </div> -->
+
+
+                                                <div class="tab-pane" id="examples-Mpdsearch-create-0-objc">
+                                                    <pre class="prettyprint"><code class="language-cpp">
+
+String *name = name_example; // scope of creating search (optional)
+
+MpdsearchApi *apiInstance = [[MpdsearchApi alloc] init];
+
+// adds a search item
+[apiInstance createWith:name
+              completionHandler: ^(ResponseSMISearchProperties output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+
+                                                    </code></pre>
+                                                </div>
+                                                <div class="tab-pane" id="examples-Mpdsearch-create-0-javascript">
+                                                    <pre class="prettyprint"><code class="language-js">
+var  = require('');
+
+var api = new .MpdsearchApi()
+
+var opts = { 
+  'name': name_example // {String} scope of creating search
+};
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.create(opts, callback);
+
+                                                    </code></pre>
+                                                </div>
+
+                                                <!--<div class="tab-pane" id="examples-Mpdsearch-create-0-angular">
+            <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+          </div>-->
+
+                                                <div class="tab-pane" id="examples-Mpdsearch-create-0-csharp">
+                                                    <pre class="prettyprint"><code class="language-cs">
+using System;
+using System.Diagnostics;
+using .Api;
+using .Client;
+using ;
+
+namespace Example
+{
+    public class createExample
+    {
+        public void main()
+        {
+            
+            var apiInstance = new MpdsearchApi();
+            var name = name_example;  // String | scope of creating search (optional) 
+
+            try
+            {
+                // adds a search item
+                ResponseSMISearchProperties result = apiInstance.create(name);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling MpdsearchApi.create: " + e.Message );
+            }
+        }
+    }
+}
+
+                                                    </code></pre>
+                                                </div>
+
+
+                                                <div class="tab-pane" id="examples-Mpdsearch-create-0-php">
+                                                  <pre class="prettyprint"><code class="language-php">
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new io.swagger.client\Api\MpdsearchApi();
+$name = name_example; // String | scope of creating search
+
+try {
+    $result = $api_instance->create($name);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling MpdsearchApi->create: ', $e->getMessage(), PHP_EOL;
+}
+
+                                                  </code></pre>
+          </div>
+
+                                            </div>
+
+
+
+
+
+                                            <h2>Parameters</h2>
+
+
+
+
+
+
+
+
+                                                <div class="methodsubtabletitle">Query parameters</div>
+                                                <table id="methodsubtable">
+                                                    <tr>
+                                                        <th width="150px">Name</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                    <!---->
+                                                        <tr><td style="width:150px;">name</td>
+<td>
+
+
+<script>
+												$(document).ready(function() {
+													var schemaWrapper = {
+  "name" : "name",
+  "in" : "query",
+  "description" : "scope of creating search",
+  "required" : false,
+  "type" : "string"
+};
+													var schema = schemaWrapper;
+
+
+
+
+													var view = new JSONSchemaView(schema,0);
+													var result = $('#d2e199_create_name');
+													result.empty();
+													result.append(view.render());
+
+
+
+
+
+												});
+												</script>
+												<div id="d2e199_create_name"></div>
+</td>
+</tr>
+
+                                                </table>
 
                                             <h2>Responses</h2>
 
@@ -1664,7 +2615,7 @@ try {
                                                 <ul class="nav nav-tabs nav-tabs-examples" >
 
                                                     <li class="active">
-                                                        <a href="#examples-Mpdpublishtwitter-addInventory-schema">Schema</a>
+                                                        <a href="#examples-Mpdsearch-create-schema">Schema</a>
                                                     </li>
 
 
@@ -1680,17 +2631,20 @@ try {
 
 
 
-                                                    <div class="tab-pane active" id="examples-Mpdpublishtwitter-addInventory-schema">
+                                                    <div class="tab-pane active" id="examples-Mpdsearch-create-schema">
 
 
 
 
-                                                        <div id='examples-Mpdpublishtwitter-addInventory-schema-201' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                                        <div id='examples-Mpdsearch-create-schema-201' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
 
                                                             <script>
                                                                 $(document).ready(function() {
                                                                     var schemaWrapper = {
-  "description" : "item created"
+  "description" : "item created",
+  "schema" : {
+    "$ref" : "#/definitions/ResponseSMISearchProperties"
+  }
 };
                                                                     var schema = schemaWrapper.schema;
                                                                     schemaWrapper.definitions = defs;
@@ -1706,8 +2660,8 @@ try {
 
 
                                                                         var view = new JSONSchemaView(resolved.schema, 3);
-                                                                        $('#examples-Mpdpublishtwitter-addInventory-schema-data').val(JSON.stringify(resolved.schema));
-                                                                        var result = $('#examples-Mpdpublishtwitter-addInventory-schema-201');
+                                                                        $('#examples-Mpdsearch-create-schema-data').val(JSON.stringify(resolved.schema));
+                                                                        var result = $('#examples-Mpdsearch-create-schema-201');
                                                                         result.empty();
                                                                         result.append(view.render());
                                                                     });
@@ -1718,7 +2672,7 @@ try {
                                                                 });
                                                             </script>
                                                         </div>
-                                                        <input id='examples-Mpdpublishtwitter-addInventory-schema-data' type='hidden' value=''></input>
+                                                        <input id='examples-Mpdsearch-create-schema-data' type='hidden' value=''></input>
 
 
 
@@ -1735,12 +2689,309 @@ try {
 
 
 
-                                                <h3> Status: 400 - invalid input, object invalid </h3>
+
+
+
+
+
+                                        </article>
+
+                                    </div>
+
+                                    <hr>
+
+
+
+
+
+
+
+
+                                    <div id="api-Mpdsearch-remove">
+
+                                        <article id="api-Mpdsearch-remove-0" data-group="User" data-name="remove" data-version="0">
+                                            <div class="pull-left">
+                                                <h1>remove</h1>
+                                                <p>remove a search item</p>
+                                            </div>
+                                            <div class="pull-right">
+
+                                            </div>
+                                            <div class="clearfix"></div>
+
+                                            <p></p>
+                                            <p class="marked">Removes an item</p>
+                                            <p></p>
+                                            <br />
+
+                                            <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/remove</span></code></pre>
+
+                                            <p>
+                                                <h3>Usage and SDK Samples</h3>
+                                            </p>
+
+                                            <ul class="nav nav-tabs nav-tabs-examples">
+                                                <li class="active">
+                                                    <a href="#examples-Mpdsearch-remove-0-curl">Curl</a>
+                                                </li>
+                                                <li class="">
+              <a href="#examples-Mpdsearch-remove-0-java">Java</a>
+            </li>
+            <li class="">
+              <a href="#examples-Mpdsearch-remove-0-android">Android</a>
+            </li>
+            <!--<li class="">
+              <a href="#examples-Mpdsearch-remove-0-groovy">Groovy</a>
+            </li>-->
+                                                <li class="">
+                                                    <a href="#examples-Mpdsearch-remove-0-objc">Obj-C</a>
+                                                </li>
+                                                <li class="">
+                                                    <a href="#examples-Mpdsearch-remove-0-javascript">JavaScript</a>
+                                                </li>
+                                                <!--<li class="">
+              <a href="#examples-Mpdsearch-remove-0-angular">Angular</a>
+            </li>-->
+                                                <li class="">
+                                                    <a href="#examples-Mpdsearch-remove-0-csharp">C#</a>
+                                                </li>
+                                                <li class="">
+              <a href="#examples-Mpdsearch-remove-0-php">PHP</a>
+            </li>
+                                            </ul>
+
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="examples-Mpdsearch-remove-0-curl">
+                                                    <pre class="prettyprint"><code class="language-bsh">
+curl -X <span style="text-transform: uppercase;">post</span> "https://virtserver.swaggerhub.com/kmoskwa/Test/1.0.0/remove?uuid="
+
+
+</code></pre>
+                                                </div>
+
+                                                <div class="tab-pane" id="examples-Mpdsearch-remove-0-java">
+                                                  <pre class="prettyprint"><code class="language-java">
+import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import .MpdsearchApi;
+
+import java.io.File;
+import java.util.*;
+
+public class MpdsearchApiExample {
+
+    public static void main(String[] args) {
+        
+        MpdsearchApi apiInstance = new MpdsearchApi();
+        UUID uuid = uuid_example; // UUID | scope of creating search
+        try {
+            ResponseSMISearchProperties result = apiInstance.remove(uuid);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling MpdsearchApi#remove");
+            e.printStackTrace();
+        }
+    }
+}
+
+                                                  </code></pre>
+          </div>
+
+
+                                                <div class="tab-pane" id="examples-Mpdsearch-remove-0-android">
+                                                  <pre class="prettyprint"><code class="language-java">
+import .MpdsearchApi;
+
+public class MpdsearchApiExample {
+
+    public static void main(String[] args) {
+        MpdsearchApi apiInstance = new MpdsearchApi();
+        UUID uuid = uuid_example; // UUID | scope of creating search
+        try {
+            ResponseSMISearchProperties result = apiInstance.remove(uuid);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling MpdsearchApi#remove");
+            e.printStackTrace();
+        }
+    }
+}
+
+                                                  </code></pre>
+          </div>
+
+          <!--
+          <div class="tab-pane" id="examples-Mpdsearch-remove-0-groovy">
+            <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+          </div> -->
+
+
+                                                <div class="tab-pane" id="examples-Mpdsearch-remove-0-objc">
+                                                    <pre class="prettyprint"><code class="language-cpp">
+
+UUID *uuid = uuid_example; // scope of creating search
+
+MpdsearchApi *apiInstance = [[MpdsearchApi alloc] init];
+
+// remove a search item
+[apiInstance removeWith:uuid
+              completionHandler: ^(ResponseSMISearchProperties output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+
+                                                    </code></pre>
+                                                </div>
+                                                <div class="tab-pane" id="examples-Mpdsearch-remove-0-javascript">
+                                                    <pre class="prettyprint"><code class="language-js">
+var  = require('');
+
+var api = new .MpdsearchApi()
+
+var uuid = uuid_example; // {UUID} scope of creating search
+
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.remove(uuid, callback);
+
+                                                    </code></pre>
+                                                </div>
+
+                                                <!--<div class="tab-pane" id="examples-Mpdsearch-remove-0-angular">
+            <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+          </div>-->
+
+                                                <div class="tab-pane" id="examples-Mpdsearch-remove-0-csharp">
+                                                    <pre class="prettyprint"><code class="language-cs">
+using System;
+using System.Diagnostics;
+using .Api;
+using .Client;
+using ;
+
+namespace Example
+{
+    public class removeExample
+    {
+        public void main()
+        {
+            
+            var apiInstance = new MpdsearchApi();
+            var uuid = uuid_example;  // UUID | scope of creating search
+
+            try
+            {
+                // remove a search item
+                ResponseSMISearchProperties result = apiInstance.remove(uuid);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling MpdsearchApi.remove: " + e.Message );
+            }
+        }
+    }
+}
+
+                                                    </code></pre>
+                                                </div>
+
+
+                                                <div class="tab-pane" id="examples-Mpdsearch-remove-0-php">
+                                                  <pre class="prettyprint"><code class="language-php">
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new io.swagger.client\Api\MpdsearchApi();
+$uuid = uuid_example; // UUID | scope of creating search
+
+try {
+    $result = $api_instance->remove($uuid);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling MpdsearchApi->remove: ', $e->getMessage(), PHP_EOL;
+}
+
+                                                  </code></pre>
+          </div>
+
+                                            </div>
+
+
+
+
+
+                                            <h2>Parameters</h2>
+
+
+
+
+
+
+
+
+                                                <div class="methodsubtabletitle">Query parameters</div>
+                                                <table id="methodsubtable">
+                                                    <tr>
+                                                        <th width="150px">Name</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                    <!---->
+                                                        <tr><td style="width:150px;">uuid*</td>
+<td>
+
+
+<script>
+												$(document).ready(function() {
+													var schemaWrapper = {
+  "name" : "uuid",
+  "in" : "query",
+  "description" : "scope of creating search",
+  "required" : true,
+  "type" : "string",
+  "format" : "uuid"
+};
+													var schema = schemaWrapper;
+
+
+
+
+													var view = new JSONSchemaView(schema,0);
+													var result = $('#d2e199_remove_uuid');
+													result.empty();
+													result.append(view.render());
+
+
+
+
+
+												});
+												</script>
+												<div id="d2e199_remove_uuid"></div>
+</td>
+</tr>
+
+                                                </table>
+
+                                            <h2>Responses</h2>
+
+                                                <h3> Status: 201 - item created </h3>
 
                                                 <ul class="nav nav-tabs nav-tabs-examples" >
 
                                                     <li class="active">
-                                                        <a href="#examples-Mpdpublishtwitter-addInventory-schema">Schema</a>
+                                                        <a href="#examples-Mpdsearch-remove-schema">Schema</a>
                                                     </li>
 
 
@@ -1756,17 +3007,20 @@ try {
 
 
 
-                                                    <div class="tab-pane active" id="examples-Mpdpublishtwitter-addInventory-schema">
+                                                    <div class="tab-pane active" id="examples-Mpdsearch-remove-schema">
 
 
 
 
-                                                        <div id='examples-Mpdpublishtwitter-addInventory-schema-400' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                                        <div id='examples-Mpdsearch-remove-schema-201' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
 
                                                             <script>
                                                                 $(document).ready(function() {
                                                                     var schemaWrapper = {
-  "description" : "invalid input, object invalid"
+  "description" : "item created",
+  "schema" : {
+    "$ref" : "#/definitions/ResponseSMISearchProperties"
+  }
 };
                                                                     var schema = schemaWrapper.schema;
                                                                     schemaWrapper.definitions = defs;
@@ -1782,8 +3036,8 @@ try {
 
 
                                                                         var view = new JSONSchemaView(resolved.schema, 3);
-                                                                        $('#examples-Mpdpublishtwitter-addInventory-schema-data').val(JSON.stringify(resolved.schema));
-                                                                        var result = $('#examples-Mpdpublishtwitter-addInventory-schema-400');
+                                                                        $('#examples-Mpdsearch-remove-schema-data').val(JSON.stringify(resolved.schema));
+                                                                        var result = $('#examples-Mpdsearch-remove-schema-201');
                                                                         result.empty();
                                                                         result.append(view.render());
                                                                     });
@@ -1794,7 +3048,7 @@ try {
                                                                 });
                                                             </script>
                                                         </div>
-                                                        <input id='examples-Mpdpublishtwitter-addInventory-schema-data' type='hidden' value=''></input>
+                                                        <input id='examples-Mpdsearch-remove-schema-data' type='hidden' value=''></input>
 
 
 
@@ -1811,12 +3065,350 @@ try {
 
 
 
-                                                <h3> Status: 409 - an existing item already exists </h3>
+
+
+
+
+
+                                        </article>
+
+                                    </div>
+
+                                    <hr>
+
+
+
+
+
+
+
+
+                                    <div id="api-Mpdsearch-rename">
+
+                                        <article id="api-Mpdsearch-rename-0" data-group="User" data-name="rename" data-version="0">
+                                            <div class="pull-left">
+                                                <h1>rename</h1>
+                                                <p>rename a search item</p>
+                                            </div>
+                                            <div class="pull-right">
+
+                                            </div>
+                                            <div class="clearfix"></div>
+
+                                            <p></p>
+                                            <p class="marked">Renames an item</p>
+                                            <p></p>
+                                            <br />
+
+                                            <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/rename</span></code></pre>
+
+                                            <p>
+                                                <h3>Usage and SDK Samples</h3>
+                                            </p>
+
+                                            <ul class="nav nav-tabs nav-tabs-examples">
+                                                <li class="active">
+                                                    <a href="#examples-Mpdsearch-rename-0-curl">Curl</a>
+                                                </li>
+                                                <li class="">
+              <a href="#examples-Mpdsearch-rename-0-java">Java</a>
+            </li>
+            <li class="">
+              <a href="#examples-Mpdsearch-rename-0-android">Android</a>
+            </li>
+            <!--<li class="">
+              <a href="#examples-Mpdsearch-rename-0-groovy">Groovy</a>
+            </li>-->
+                                                <li class="">
+                                                    <a href="#examples-Mpdsearch-rename-0-objc">Obj-C</a>
+                                                </li>
+                                                <li class="">
+                                                    <a href="#examples-Mpdsearch-rename-0-javascript">JavaScript</a>
+                                                </li>
+                                                <!--<li class="">
+              <a href="#examples-Mpdsearch-rename-0-angular">Angular</a>
+            </li>-->
+                                                <li class="">
+                                                    <a href="#examples-Mpdsearch-rename-0-csharp">C#</a>
+                                                </li>
+                                                <li class="">
+              <a href="#examples-Mpdsearch-rename-0-php">PHP</a>
+            </li>
+                                            </ul>
+
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="examples-Mpdsearch-rename-0-curl">
+                                                    <pre class="prettyprint"><code class="language-bsh">
+curl -X <span style="text-transform: uppercase;">post</span> "https://virtserver.swaggerhub.com/kmoskwa/Test/1.0.0/rename?uuid=&newName="
+
+
+</code></pre>
+                                                </div>
+
+                                                <div class="tab-pane" id="examples-Mpdsearch-rename-0-java">
+                                                  <pre class="prettyprint"><code class="language-java">
+import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import .MpdsearchApi;
+
+import java.io.File;
+import java.util.*;
+
+public class MpdsearchApiExample {
+
+    public static void main(String[] args) {
+        
+        MpdsearchApi apiInstance = new MpdsearchApi();
+        UUID uuid = uuid_example; // UUID | search uuid to be renamed
+        String newName = newName_example; // String | search uuid to be renamed
+        try {
+            ResponseSMISearchProperties result = apiInstance.rename(uuid, newName);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling MpdsearchApi#rename");
+            e.printStackTrace();
+        }
+    }
+}
+
+                                                  </code></pre>
+          </div>
+
+
+                                                <div class="tab-pane" id="examples-Mpdsearch-rename-0-android">
+                                                  <pre class="prettyprint"><code class="language-java">
+import .MpdsearchApi;
+
+public class MpdsearchApiExample {
+
+    public static void main(String[] args) {
+        MpdsearchApi apiInstance = new MpdsearchApi();
+        UUID uuid = uuid_example; // UUID | search uuid to be renamed
+        String newName = newName_example; // String | search uuid to be renamed
+        try {
+            ResponseSMISearchProperties result = apiInstance.rename(uuid, newName);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling MpdsearchApi#rename");
+            e.printStackTrace();
+        }
+    }
+}
+
+                                                  </code></pre>
+          </div>
+
+          <!--
+          <div class="tab-pane" id="examples-Mpdsearch-rename-0-groovy">
+            <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+          </div> -->
+
+
+                                                <div class="tab-pane" id="examples-Mpdsearch-rename-0-objc">
+                                                    <pre class="prettyprint"><code class="language-cpp">
+
+UUID *uuid = uuid_example; // search uuid to be renamed
+String *newName = newName_example; // search uuid to be renamed
+
+MpdsearchApi *apiInstance = [[MpdsearchApi alloc] init];
+
+// rename a search item
+[apiInstance renameWith:uuid
+    newName:newName
+              completionHandler: ^(ResponseSMISearchProperties output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+
+                                                    </code></pre>
+                                                </div>
+                                                <div class="tab-pane" id="examples-Mpdsearch-rename-0-javascript">
+                                                    <pre class="prettyprint"><code class="language-js">
+var  = require('');
+
+var api = new .MpdsearchApi()
+
+var uuid = uuid_example; // {UUID} search uuid to be renamed
+
+var newName = newName_example; // {String} search uuid to be renamed
+
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.rename(uuid, newName, callback);
+
+                                                    </code></pre>
+                                                </div>
+
+                                                <!--<div class="tab-pane" id="examples-Mpdsearch-rename-0-angular">
+            <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+          </div>-->
+
+                                                <div class="tab-pane" id="examples-Mpdsearch-rename-0-csharp">
+                                                    <pre class="prettyprint"><code class="language-cs">
+using System;
+using System.Diagnostics;
+using .Api;
+using .Client;
+using ;
+
+namespace Example
+{
+    public class renameExample
+    {
+        public void main()
+        {
+            
+            var apiInstance = new MpdsearchApi();
+            var uuid = uuid_example;  // UUID | search uuid to be renamed
+            var newName = newName_example;  // String | search uuid to be renamed
+
+            try
+            {
+                // rename a search item
+                ResponseSMISearchProperties result = apiInstance.rename(uuid, newName);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling MpdsearchApi.rename: " + e.Message );
+            }
+        }
+    }
+}
+
+                                                    </code></pre>
+                                                </div>
+
+
+                                                <div class="tab-pane" id="examples-Mpdsearch-rename-0-php">
+                                                  <pre class="prettyprint"><code class="language-php">
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new io.swagger.client\Api\MpdsearchApi();
+$uuid = uuid_example; // UUID | search uuid to be renamed
+$newName = newName_example; // String | search uuid to be renamed
+
+try {
+    $result = $api_instance->rename($uuid, $newName);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling MpdsearchApi->rename: ', $e->getMessage(), PHP_EOL;
+}
+
+                                                  </code></pre>
+          </div>
+
+                                            </div>
+
+
+
+
+
+                                            <h2>Parameters</h2>
+
+
+
+
+
+
+
+
+                                                <div class="methodsubtabletitle">Query parameters</div>
+                                                <table id="methodsubtable">
+                                                    <tr>
+                                                        <th width="150px">Name</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                    <!---->
+                                                        <tr><td style="width:150px;">uuid*</td>
+<td>
+
+
+<script>
+												$(document).ready(function() {
+													var schemaWrapper = {
+  "name" : "uuid",
+  "in" : "query",
+  "description" : "search uuid to be renamed",
+  "required" : true,
+  "type" : "string",
+  "format" : "uuid"
+};
+													var schema = schemaWrapper;
+
+
+
+
+													var view = new JSONSchemaView(schema,0);
+													var result = $('#d2e199_rename_uuid');
+													result.empty();
+													result.append(view.render());
+
+
+
+
+
+												});
+												</script>
+												<div id="d2e199_rename_uuid"></div>
+</td>
+</tr>
+
+                                                        <tr><td style="width:150px;">newName*</td>
+<td>
+
+
+<script>
+												$(document).ready(function() {
+													var schemaWrapper = {
+  "name" : "newName",
+  "in" : "query",
+  "description" : "search uuid to be renamed",
+  "required" : true,
+  "type" : "string"
+};
+													var schema = schemaWrapper;
+
+
+
+
+													var view = new JSONSchemaView(schema,0);
+													var result = $('#d2e199_rename_newName');
+													result.empty();
+													result.append(view.render());
+
+
+
+
+
+												});
+												</script>
+												<div id="d2e199_rename_newName"></div>
+</td>
+</tr>
+
+                                                </table>
+
+                                            <h2>Responses</h2>
+
+                                                <h3> Status: 201 - item renamed </h3>
 
                                                 <ul class="nav nav-tabs nav-tabs-examples" >
 
                                                     <li class="active">
-                                                        <a href="#examples-Mpdpublishtwitter-addInventory-schema">Schema</a>
+                                                        <a href="#examples-Mpdsearch-rename-schema">Schema</a>
                                                     </li>
 
 
@@ -1832,17 +3424,20 @@ try {
 
 
 
-                                                    <div class="tab-pane active" id="examples-Mpdpublishtwitter-addInventory-schema">
+                                                    <div class="tab-pane active" id="examples-Mpdsearch-rename-schema">
 
 
 
 
-                                                        <div id='examples-Mpdpublishtwitter-addInventory-schema-409' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                                        <div id='examples-Mpdsearch-rename-schema-201' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
 
                                                             <script>
                                                                 $(document).ready(function() {
                                                                     var schemaWrapper = {
-  "description" : "an existing item already exists"
+  "description" : "item renamed",
+  "schema" : {
+    "$ref" : "#/definitions/ResponseSMISearchProperties"
+  }
 };
                                                                     var schema = schemaWrapper.schema;
                                                                     schemaWrapper.definitions = defs;
@@ -1858,8 +3453,8 @@ try {
 
 
                                                                         var view = new JSONSchemaView(resolved.schema, 3);
-                                                                        $('#examples-Mpdpublishtwitter-addInventory-schema-data').val(JSON.stringify(resolved.schema));
-                                                                        var result = $('#examples-Mpdpublishtwitter-addInventory-schema-409');
+                                                                        $('#examples-Mpdsearch-rename-schema-data').val(JSON.stringify(resolved.schema));
+                                                                        var result = $('#examples-Mpdsearch-rename-schema-201');
                                                                         result.empty();
                                                                         result.append(view.render());
                                                                     });
@@ -1870,7 +3465,7 @@ try {
                                                                 });
                                                             </script>
                                                         </div>
-                                                        <input id='examples-Mpdpublishtwitter-addInventory-schema-data' type='hidden' value=''></input>
+                                                        <input id='examples-Mpdsearch-rename-schema-data' type='hidden' value=''></input>
 
 
 
@@ -1917,13 +3512,13 @@ try {
                     <p>Suggestions, contact, support and error reporting;
                             <div class="app-desc">Contact Info: <a href="krzysztof.moskwa@zut.edu.pl">krzysztof.moskwa@zut.edu.pl</a></div>
                     </p>
-                        <div class="license-info">Apache 2.0</div>
-                        <div class="license-url">http://www.apache.org/licenses/LICENSE-2.0.html</div>
+                        <div class="license-info">Closed</div>
+                        <div class="license-url">http://apache.org/licenses/LICENSE-2.0.html</div>
                 </div>
             </div>
             <div id="generator">
                 <div class="content">
-                    Generated 2017-05-23T19:49:15.678Z
+                    Generated 2017-05-25T05:31:03.267Z
                 </div>
             </div>
         </div>
