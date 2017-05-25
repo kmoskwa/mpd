@@ -1,0 +1,431 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "This is a simple API",
+    "version" : "1.0.0",
+    "title" : "Simple Inventory API",
+    "contact" : {
+      "email" : "krzysztof.moskwa@zut.edu.pl"
+    },
+    "license" : {
+      "name" : "Closed"
+    }
+  },
+  "host" : "virtserver.swaggerhub.com",
+  "basePath" : "/kmoskwa/Test/1.0.0",
+  "tags" : [ {
+    "name" : "mpd.publish.twitter",
+    "description" : "Social Media Ingest Twitter related operations"
+  }, {
+    "name" : "mpd.ingest",
+    "description" : "Social Media Ingest Orchestration Engine"
+  }, {
+    "name" : "mpd.search",
+    "description" : "Social Media Ingest Operations on Search Instances"
+  }, {
+    "name" : "mpd.rules",
+    "description" : "Social Media Ingest Operations Related to Message Assessment"
+  } ],
+  "schemes" : [ "https" ],
+  "paths" : {
+    "/query" : {
+      "get" : {
+        "tags" : [ "mpd.publish.twitter" ],
+        "summary" : "Queries search response",
+        "description" : "By passing in the appropriate options, you can search for\navailable inventory in the system\n",
+        "operationId" : "query",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "searchUuid",
+          "in" : "query",
+          "description" : "query id",
+          "required" : true,
+          "type" : "string",
+          "format" : "uuid"
+        }, {
+          "in" : "body",
+          "name" : "parameters",
+          "description" : "query parameters",
+          "required" : true,
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/QuerySMIParameterProperties"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "correct result",
+            "schema" : {
+              "$ref" : "#/definitions/ResponseSMIMessageArray"
+            }
+          },
+          "400" : {
+            "description" : "bad input parameter"
+          }
+        }
+      }
+    },
+    "/queryParameters" : {
+      "get" : {
+        "tags" : [ "mpd.publish.twitter" ],
+        "summary" : "returns list of parameters of the search for specific sourcee",
+        "description" : "By passing in the appropriate options, you can search for\navailable inventory in the system\n",
+        "operationId" : "queryParameters",
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "correct result",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/ResponseSMIParameterProperties"
+              }
+            }
+          },
+          "400" : {
+            "description" : "bad input parameter"
+          }
+        }
+      }
+    },
+    "/list" : {
+      "get" : {
+        "tags" : [ "mpd.search" ],
+        "summary" : "Lists searches within provided scope",
+        "description" : "Lists searches within provided scope (user,  system, all/empty)",
+        "operationId" : "addInventory",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "scope",
+          "in" : "query",
+          "description" : "scope of receiving searches",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "ok",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/ResponseSMISearchProperties"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/create" : {
+      "post" : {
+        "tags" : [ "mpd.search" ],
+        "summary" : "adds a search item",
+        "description" : "Adds an item to the system or user scope",
+        "operationId" : "create",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "name",
+          "in" : "query",
+          "description" : "scope of creating search",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "item created",
+            "schema" : {
+              "$ref" : "#/definitions/ResponseSMISearchProperties"
+            }
+          }
+        }
+      }
+    },
+    "/remove" : {
+      "post" : {
+        "tags" : [ "mpd.search" ],
+        "summary" : "remove a search item",
+        "description" : "Removes an item",
+        "operationId" : "remove",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "uuid",
+          "in" : "query",
+          "description" : "scope of creating search",
+          "required" : true,
+          "type" : "string",
+          "format" : "uuid"
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "item created",
+            "schema" : {
+              "$ref" : "#/definitions/ResponseSMISearchProperties"
+            }
+          }
+        }
+      }
+    },
+    "/rename" : {
+      "post" : {
+        "tags" : [ "mpd.search" ],
+        "summary" : "rename a search item",
+        "description" : "Renames an item",
+        "operationId" : "rename",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "uuid",
+          "in" : "query",
+          "description" : "search uuid to be renamed",
+          "required" : true,
+          "type" : "string",
+          "format" : "uuid"
+        }, {
+          "name" : "newName",
+          "in" : "query",
+          "description" : "search uuid to be renamed",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "item renamed",
+            "schema" : {
+              "$ref" : "#/definitions/ResponseSMISearchProperties"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "ResponseSMISearchProperties" : {
+      "type" : "object",
+      "properties" : {
+        "uuid" : {
+          "type" : "string",
+          "format" : "uuid",
+          "example" : "uuid"
+        },
+        "name" : {
+          "type" : "string",
+          "example" : "searchName"
+        }
+      }
+    },
+    "QuerySMIParameterProperties" : {
+      "type" : "object",
+      "properties" : {
+        "paramID" : {
+          "type" : "string",
+          "example" : "paramID"
+        },
+        "value" : {
+          "type" : "string",
+          "example" : "paramValue"
+        }
+      }
+    },
+    "ResponseSMIParameterProperties" : {
+      "type" : "object",
+      "properties" : {
+        "paramID" : {
+          "type" : "string",
+          "example" : "paramID"
+        },
+        "translationID" : {
+          "type" : "string",
+          "example" : "mpd.smi.paramID"
+        }
+      }
+    },
+    "ResponseSMIParameterArray" : {
+      "type" : "object",
+      "properties" : {
+        "parameters" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/ResponseSMIParameterProperties"
+          }
+        }
+      }
+    },
+    "ResponseSMIReactionProperties" : {
+      "type" : "object",
+      "properties" : {
+        "like" : {
+          "type" : "integer",
+          "example" : -1
+        },
+        "love" : {
+          "type" : "integer",
+          "example" : -1
+        },
+        "wow" : {
+          "type" : "integer",
+          "example" : -1
+        },
+        "haha" : {
+          "type" : "integer",
+          "example" : -1
+        },
+        "sad" : {
+          "type" : "integer",
+          "example" : -1
+        },
+        "angry" : {
+          "type" : "integer",
+          "example" : -1
+        },
+        "thankful" : {
+          "type" : "integer",
+          "example" : -1
+        },
+        "responses" : {
+          "type" : "integer",
+          "example" : -1
+        }
+      }
+    },
+    "ResponseSMIImageProperties" : {
+      "type" : "object",
+      "required" : [ "url", "uuid" ],
+      "properties" : {
+        "uuid" : {
+          "type" : "string",
+          "format" : "uuid",
+          "example" : "???"
+        },
+        "url" : {
+          "type" : "string",
+          "example" : "???"
+        },
+        "urlThumbnail" : {
+          "type" : "string",
+          "example" : "???"
+        },
+        "contentBase64" : {
+          "type" : "string",
+          "example" : "???"
+        }
+      }
+    },
+    "ResponseSMIVideoProperties" : {
+      "type" : "object",
+      "properties" : {
+        "uuid" : {
+          "type" : "string",
+          "example" : "???"
+        },
+        "url" : {
+          "type" : "string",
+          "format" : "url",
+          "example" : "???"
+        },
+        "supported" : {
+          "type" : "boolean",
+          "example" : true
+        },
+        "downloaded" : {
+          "type" : "boolean",
+          "example" : false
+        },
+        "status" : {
+          "type" : "string",
+          "example" : "OK"
+        }
+      }
+    },
+    "ResponseSMIMessageProperties" : {
+      "type" : "object",
+      "properties" : {
+        "locked" : {
+          "type" : "boolean",
+          "example" : false
+        },
+        "modified" : {
+          "type" : "boolean",
+          "example" : false
+        },
+        "removed" : {
+          "type" : "boolean",
+          "example" : false
+        }
+      }
+    },
+    "ResponseSMIMessage" : {
+      "type" : "object",
+      "properties" : {
+        "uuid" : {
+          "type" : "string",
+          "example" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+        },
+        "publisher" : {
+          "type" : "string",
+          "example" : "Martin Geck"
+        },
+        "message" : {
+          "type" : "string",
+          "example" : "Message content example"
+        },
+        "assessment" : {
+          "type" : "integer",
+          "example" : 0
+        },
+        "rating" : {
+          "type" : "integer",
+          "example" : 0
+        },
+        "publishedDate" : {
+          "type" : "string",
+          "format" : "datetime",
+          "example" : "0"
+        },
+        "reactionsNumber" : {
+          "type" : "integer",
+          "example" : "??"
+        },
+        "reactionProperties" : {
+          "$ref" : "#/definitions/ResponseSMIReactionProperties"
+        },
+        "avatarProperties" : {
+          "$ref" : "#/definitions/ResponseSMIImageProperties"
+        },
+        "imageProperties" : {
+          "$ref" : "#/definitions/ResponseSMIImageProperties"
+        },
+        "videoProperties" : {
+          "$ref" : "#/definitions/ResponseSMIVideoProperties"
+        },
+        "statusProperties" : {
+          "$ref" : "#/definitions/ResponseSMIMessageProperties"
+        }
+      }
+    },
+    "ResponseSMIMessageArray" : {
+      "type" : "object",
+      "properties" : {
+        "searchUuid" : {
+          "type" : "string",
+          "format" : "uuid",
+          "example" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+        },
+        "nextUuid" : {
+          "type" : "string",
+          "example" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+        },
+        "messages" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/ResponseSMIMessage"
+          }
+        }
+      }
+    }
+  }
+}
